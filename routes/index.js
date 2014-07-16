@@ -2,16 +2,6 @@ var express = require('express');
 var router = express.Router();
 var sos = require('sos-device');
 
-function getSosDeviceInfo(callback, startupData) {
-    return startupData.sosDevice.readAllInfo(function (err, deviceInfo) {
-        if (err) {
-            return callback(err);
-        }
-        console.log("deviceInfo:", deviceInfo);
-        return callback(null, deviceInfo);
-    });
-}
-
 /* GET home page. */
 router.get('/', function(req, res) {
     sos.connect(function(err, sosDevice) {
@@ -21,9 +11,10 @@ router.get('/', function(req, res) {
         sosDevice.readAllInfo(function(err2, deviceInfo) {
             if (err2) {
                 res.render('index', { title: 'Siren of Shame Web Listener', device: null });
+            } else {
+                console.log("deviceInfo:", deviceInfo);
+                res.render('index', { title: 'Siren of Shame Web Listener', device: sosDevice, deviceInfo: deviceInfo });
             }
-            console.log("deviceInfo:", deviceInfo);
-            res.render('index', { title: 'Siren of Shame Web Listener', device: sosDevice, deviceInfo: deviceInfo });
         });
     });
 });
