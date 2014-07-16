@@ -4,4 +4,7 @@ block content
   .jumbotron
     .container
       h1= title
-      p Welcome to #{title}
+      p Light the lights, sound the siren, right here, right now via http
+  .container
+    form(action='/turnon',method='post')
+      input.btn.btn-danger(type='submit',value='Turn On')
