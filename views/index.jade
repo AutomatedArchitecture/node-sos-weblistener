@@ -6,5 +6,18 @@ block content
       h1= title
       p Light the lights, sound the siren, right here, right now via http
   .container
-    form(action='/turnon',method='post')
-      input.btn.btn-danger(type='submit',value='Turn On')
+    .col-md-8
+      form(action='/turnon',method='post')
+        input.btn.btn-danger(type='submit',value='Turn On')
+    .col-md-4
+      h2 Device Status
+      p= err
+      dl
+        dt version
+        dd= deviceInfo.version
+      dl
+        dt hardwareType
+        dd= deviceInfo.hardwareType
+      dl
+        dt hardwareVersion
+        dd= deviceInfo.hardwareVersion

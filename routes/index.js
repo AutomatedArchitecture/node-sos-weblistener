@@ -6,11 +6,11 @@ var sos = require('sos-device');
 router.get('/', function(req, res) {
     sos.connect(function(err, sosDevice) {
         if (err) {
-            res.render('index', { title: 'Siren of Shame Web Listener', device: null });
+            res.render('index', { title: 'Siren of Shame Web Listener', err: err });
         }
         sosDevice.readAllInfo(function(err2, deviceInfo) {
             if (err2) {
-                res.render('index', { title: 'Siren of Shame Web Listener', device: null });
+                res.render('index', { title: 'Siren of Shame Web Listener', err: err2 });
             } else {
                 console.log("deviceInfo:", deviceInfo);
                 res.render('index', { title: 'Siren of Shame Web Listener', device: sosDevice, deviceInfo: deviceInfo });
